@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1247.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainWindowController">
+   <children>
+      <Label alignment="CENTER" layoutX="441.0" layoutY="14.0" prefHeight="49.0" prefWidth="447.0" text="Visualizador de imágenes" textFill="#005723">
+         <font>
+            <Font name="SansSerif Bold" size="32.0" />
+         </font>
+      </Label>
+      <Button id="btnSearch" fx:id="btnBuscar" layoutX="300.0" layoutY="780.0" mnemonicParsing="false" onAction="#searchImage" style="-fx-background-radius: 10; -fx-background-color: #a4c465;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="24.0" />
+         </font></Button>
+      <Button fx:id="btnAnalyze" layoutX="922.0" layoutY="780.0" mnemonicParsing="false" onAction="#analyzeImage" style="-fx-background-color: #a4c465; -fx-background-radius: 10;" text="Analizar" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="24.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER" layoutX="32.0" layoutY="63.0" prefHeight="706.0" prefWidth="1183.0">
+         <children>
+            <Canvas fx:id="canvas" height="708.0" width="1183.0" />
+         </children>
+      </HBox>
+   </children>
+</Pane>
