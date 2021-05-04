@@ -34,6 +34,8 @@ public class MainWindowController {
 
 	private String path;
 
+	private Image image;
+
 	@FXML
 	void analyzeImage(ActionEvent event) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -41,6 +43,7 @@ public class MainWindowController {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document documento = builder.parse(new File(this.getXmlRoute()));
 			documento.getDocumentElement().normalize();
+			double porcentaje = 0.4;
 
 			NodeList listaObjects = documento.getElementsByTagName("object");
 
@@ -52,7 +55,7 @@ public class MainWindowController {
 
 					Node actualBox = actualElement.getElementsByTagName("bndbox").item(0);
 					NodeList coordinates = actualBox.getChildNodes();
-					int[] rectangleCoor = new int[4];
+					double[] rectangleCoor = new double[4];
 					for (int j = 0; j < coordinates.getLength(); j++) {
 
 						if (coordinates.item(j).getNodeType() == Element.ELEMENT_NODE) {
@@ -60,28 +63,44 @@ public class MainWindowController {
 							System.out.println("propiedad: " + coorElement.getNodeName() + "valor: "
 									+ coorElement.getTextContent() + "indice: " + j);
 							if (j == 1) {
-								rectangleCoor[0] = Integer.parseInt(coorElement.getTextContent());
+								rectangleCoor[0] = Double.parseDouble(coorElement.getTextContent());
+								double aux = rectangleCoor[0] * porcentaje;
+								rectangleCoor[0] -= aux;
 							} else if (j == 3) {
 
-								rectangleCoor[1] = Integer.parseInt(coorElement.getTextContent());
+								rectangleCoor[1] = Double.parseDouble(coorElement.getTextContent());
+								double aux = rectangleCoor[1] * porcentaje;
+								rectangleCoor[1] -= aux;
 							} else if (j == 5) {
 
-								rectangleCoor[2] = Integer.parseInt(coorElement.getTextContent());
+								rectangleCoor[2] = Double.parseDouble(coorElement.getTextContent());
+								double aux = rectangleCoor[2] * porcentaje;
+								rectangleCoor[2] -= aux;
 							} else if (j == 7) {
-								rectangleCoor[3] = Integer.parseInt(coorElement.getTextContent());
+								rectangleCoor[3] = Double.parseDouble(coorElement.getTextContent());
+								double aux = rectangleCoor[3] * porcentaje;
+								rectangleCoor[3] -= aux;
 
 							}
 
 						}
 
 					}
+					// rectangleCoor[0] = Xmin
+					// rectangleCoor[1] = Ymin
+					// rectangleCoor[2] = Xmax
+					// rectangleCoor[3] = Ymax
 
 					GraphicsContext g = this.canvas.getGraphicsContext2D();
 
-					g.strokeRect(rectangleCoor[3], rectangleCoor[0], rectangleCoor[2] - rectangleCoor[0],
-							rectangleCoor[3] - rectangleCoor[1]);
+					double ancho = rectangleCoor[2] - rectangleCoor[0];
+					double alto = rectangleCoor[3] - rectangleCoor[1];
 
-//					g.strokeRect(0, 0, 100, 500);
+					g.strokeRect(rectangleCoor[0], ((this.image.getHeight() - (this.image.getHeight() * porcentaje))
+							- ((this.image.getHeight() - (this.image.getHeight() * porcentaje)) - rectangleCoor[3]))
+							- alto, ancho, alto);
+
+//					g.strokeRect(100, 50, 100, 100);
 
 				}
 			}
@@ -126,10 +145,20 @@ public class MainWindowController {
 
 		if (file != null) {
 			this.path = file.toURI().toString();
-			Image image = new Image(this.path);
-			System.out.println("ANCHO: " + image.getWidth() + "Alto: " + image.getHeight());
+			this.image = new Image(this.path);
+			System.out.println("ANCHO: " + image.getWidth() + " ALTO: " + image.getHeight());
 			GraphicsContext g = this.canvas.getGraphicsContext2D();
-			g.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
+
+			System.out.println("Relación de aspecto: " + image.getWidth() / image.getHeight());
+
+			double porcentaje = 0.4;// 20%
+			double restaAncho = porcentaje * image.getWidth();
+			double restaAlto = porcentaje * image.getHeight();
+
+			double anchoFinal = image.getWidth() - restaAncho;
+			double altoFinal = image.getHeight() - restaAlto;
+
+			g.drawImage(image, 0, 0, anchoFinal, altoFinal);
 
 		}
 
