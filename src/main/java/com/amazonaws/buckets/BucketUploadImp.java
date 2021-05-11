@@ -33,8 +33,6 @@ public class BucketUploadImp implements BucketUpload {
 		credentialsProvider = new ProfileCredentialsProvider();
 		try {
 			credentialsProvider.getCredentials();
-			
-			System.out.println("estoy aqui");
 		} catch (Exception e) {
 			throw new AmazonClientException("Cannot load the credentials from the credential profiles file. ", e);
 		}
@@ -87,7 +85,7 @@ public class BucketUploadImp implements BucketUpload {
 
 	public void createAmazonS3Bucket(String bucket) {
 		try {
-			if (tx.getAmazonS3Client().doesBucketExistV2(bucket) == false) {
+			if (tx.getAmazonS3Client().doesBucketExist(bucket) == false) {
 				tx.getAmazonS3Client().createBucket(bucket);
 			}
 		} catch (AmazonClientException ace) {
