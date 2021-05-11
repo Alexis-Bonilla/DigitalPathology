@@ -1,5 +1,6 @@
 package model;
 
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.DescribeProjectVersionsRequest;
@@ -22,7 +23,8 @@ public class StartModel {
 		int minInferenceUnits = 1;
 		String versionName = "DigitalPatology.2021-04-26T11.24.35";
 
-		AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
+		AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(Regions.US_EAST_1)
+				.build();
 
 		StartProjectVersionRequest request = new StartProjectVersionRequest().withMinInferenceUnits(minInferenceUnits)
 				.withProjectVersionArn(projectVersionArn);
