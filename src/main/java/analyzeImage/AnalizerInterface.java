@@ -6,5 +6,5 @@ import com.amazonaws.services.rekognition.model.CustomLabel;
 
 public interface AnalizerInterface {
 
-	public ArrayList<CustomLabel> analizeImage(String path);
+	public ArrayList<CustomLabel> analyzeImage(String path);
 }

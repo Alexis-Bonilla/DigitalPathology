@@ -49,7 +49,7 @@ public class AnalizerInterfaceImp implements AnalizerInterface {
 
 	}
 
-	public ArrayList<CustomLabel> analizeImage(String path) {
+	public ArrayList<CustomLabel> analyzeImage(String path) {
 		this.photo = path;
 		ArrayList<CustomLabel> customLabels = new ArrayList<CustomLabel>();
 
