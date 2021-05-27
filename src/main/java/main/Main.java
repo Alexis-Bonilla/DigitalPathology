@@ -22,6 +22,7 @@ public class Main extends Application {
 //			stage.setFullScreen(true);
 //			stage.setMaximized(true);
 			Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+
 			Scene mainScene = new Scene(root);
 			stage.setScene(mainScene);
 

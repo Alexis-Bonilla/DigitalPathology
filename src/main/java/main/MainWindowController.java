@@ -193,8 +193,10 @@ public class MainWindowController {
 
 		if (file != null) {
 			this.path = file.toURI().toString();
+
 			System.out.println("path: " + path);
 			this.image = new Image(this.path);
+			System.out.println("ruta: " + file.getPath());
 
 //			this.image = new Image(this.path);
 			System.out.println("ANCHO: " + image.getWidth() + " ALTO: " + image.getHeight());
@@ -208,6 +210,9 @@ public class MainWindowController {
 
 			double anchoFinal = image.getWidth() - restaAncho;
 			double altoFinal = image.getHeight() - restaAlto;
+
+			System.out.println("ancho final: " + anchoFinal);
+			System.out.println("alto final: " + altoFinal);
 
 			g.drawImage(image, 0, 0, anchoFinal, altoFinal);
 			changeRoute(this.path);

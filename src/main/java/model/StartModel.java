@@ -8,9 +8,6 @@ import com.amazonaws.services.rekognition.model.DescribeProjectVersionsResult;
 import com.amazonaws.services.rekognition.model.ProjectVersionDescription;
 import com.amazonaws.services.rekognition.model.StartProjectVersionRequest;
 import com.amazonaws.services.rekognition.model.StartProjectVersionResult;
-
-import com.amazonaws.services.rekognition.model.StopProjectVersionRequest;
-import com.amazonaws.services.rekognition.model.StopProjectVersionResult;
 import com.amazonaws.waiters.Waiter;
 import com.amazonaws.waiters.WaiterParameters;
 
@@ -52,23 +49,21 @@ public class StartModel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		
-		
+
 		System.out.println("El modelo esta prendido");
-		
+
 		try {
-	          
-	         StopProjectVersionRequest requeststop = new StopProjectVersionRequest()
-	                  .withProjectVersionArn(projectVersionArn); 
-	         StopProjectVersionResult result = rekognitionClient.stopProjectVersion(requeststop);
-	  
-	         System.out.println(result.getStatus());
 
-	      } catch(Exception e) {
-	         System.out.println(e.toString());
-	      }
-	      System.out.println("Done...");
-	   }
+//	         StopProjectVersionRequest requeststop = new StopProjectVersionRequest()
+//	                  .withProjectVersionArn(projectVersionArn);
+//	         StopProjectVersionResult result = rekognitionClient.stopProjectVersion(requeststop);
+//
+//	         System.out.println(result.getStatus());
 
-	
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		System.out.println("Done...");
+	}
+
 }

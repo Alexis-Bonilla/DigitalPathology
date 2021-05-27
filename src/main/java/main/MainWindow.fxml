@@ -25,7 +25,7 @@
          </font></Button>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="51.0" prefHeight="734.4" prefWidth="979.2">
          <children>
-            <Canvas fx:id="canvas" height="734.4" width="979.2" />
+            <Canvas fx:id="canvas" height="734.4" width="979.2"  />
          </children>
       </HBox>
    </children>
