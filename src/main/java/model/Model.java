@@ -8,20 +8,27 @@ import com.amazonaws.services.rekognition.model.DescribeProjectVersionsResult;
 import com.amazonaws.services.rekognition.model.ProjectVersionDescription;
 import com.amazonaws.services.rekognition.model.StartProjectVersionRequest;
 import com.amazonaws.services.rekognition.model.StartProjectVersionResult;
+import com.amazonaws.services.rekognition.model.StopProjectVersionRequest;
+import com.amazonaws.services.rekognition.model.StopProjectVersionResult;
 import com.amazonaws.waiters.Waiter;
 import com.amazonaws.waiters.WaiterParameters;
 
-public class StartModel {
+public class Model {
 
-	public static void main(String[] args) throws Exception {
+	private AmazonRekognition rekognitionClient;
 
-		String projectVersionArn = "arn:aws:rekognition:us-east-1:682086073548:project/DigitalPatology/version/DigitalPatology.2021-04-26T11.24.35/1619454274199";
-		String projectArn = "arn:aws:rekognition:us-east-1:682086073548:project/DigitalPatology/1619307010888";
-		int minInferenceUnits = 1;
-		String versionName = "DigitalPatology.2021-04-26T11.24.35";
+	private String projectVersionArn = "arn:aws:rekognition:us-east-1:682086073548:project/DigitalPatology/version/DigitalPatology.2021-04-26T11.24.35/1619454274199";
+	private String projectArn = "arn:aws:rekognition:us-east-1:682086073548:project/DigitalPatology/1619307010888";
+	private int minInferenceUnits = 1;
+	private String versionName = "DigitalPatology.2021-04-26T11.24.35";
 
-		AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(Regions.US_EAST_1)
-				.build();
+	public Model() {
+
+		rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+
+	}
+
+	public void start() {
 
 		StartProjectVersionRequest request = new StartProjectVersionRequest().withMinInferenceUnits(minInferenceUnits)
 				.withProjectVersionArn(projectVersionArn);
@@ -50,15 +57,17 @@ public class StartModel {
 			System.out.println(e.toString());
 		}
 
-		System.out.println("El modelo esta prendido");
+	}
+
+	public void stop() {
 
 		try {
 
-//	         StopProjectVersionRequest requeststop = new StopProjectVersionRequest()
-//	                  .withProjectVersionArn(projectVersionArn);
-//	         StopProjectVersionResult result = rekognitionClient.stopProjectVersion(requeststop);
-//
-//	         System.out.println(result.getStatus());
+			StopProjectVersionRequest request = new StopProjectVersionRequest()
+					.withProjectVersionArn(projectVersionArn);
+			StopProjectVersionResult result = rekognitionClient.stopProjectVersion(request);
+
+			System.out.println(result.getStatus());
 
 		} catch (Exception e) {
 			System.out.println(e.toString());

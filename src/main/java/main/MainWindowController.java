@@ -46,6 +46,7 @@ public class MainWindowController {
 
 		this.uploader = new BucketUploadImp(Regions.US_EAST_1);
 		String[] images = { this.path.substring(6) };
+		System.out.println("EL QUE BUSCO" + images[0]);
 
 		boolean succesUpload = this.uploader.loadImages(images, this.BUCKET);
 
@@ -61,6 +62,7 @@ public class MainWindowController {
 		GraphicsContext g = this.canvas.getGraphicsContext2D();
 
 		ArrayList<CustomLabel> customLabels = analizer.analyzeImage(changeRoute(path));
+
 		for (CustomLabel customLabel : customLabels) {
 
 			if (customLabel.getGeometry() != null) {
